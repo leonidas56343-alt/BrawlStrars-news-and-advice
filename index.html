@@ -1,1377 +1,3103 @@
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10101a">
-<title>SHADE BRAWL — Brawl Stars Fan Site</title>
+
+<meta name="theme-color" content="#090912">
+
+<title>SHADE BRAWL</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(128,55,255,.25),transparent 28%),
-    radial-gradient(circle at 85% 20%,rgba(255,196,50,.16),transparent 25%),
-    linear-gradient(135deg,#080811,#131322 45%,#09090f);
-  color:#fff;
-  overflow-x:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(126,58,255,.25),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,210,40,.13),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #07070d,
+            #11111d 50%,
+            #08080e
+        );
+
+    overflow-x:hidden;
 }
 
 body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.12;
-  background-image:
-    radial-gradient(#fff 1px,transparent 1px);
-  background-size:34px 34px;
-  z-index:-1;
-}
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
 
-a{
-  color:inherit;
-  text-decoration:none;
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        );
+
+    background-size:35px 35px;
+    opacity:.08;
 }
 
 button,
 input,
-select,
 textarea{
-  font:inherit;
+    font-family:inherit;
 }
 
 button{
-  cursor:pointer;
+    cursor:pointer;
 }
 
-/* TOP */
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:14px 5%;
-  background:rgba(8,8,17,.88);
-  backdrop-filter:blur(16px);
-  border-bottom:2px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:14px 5%;
+
+    background:rgba(8,8,15,.9);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:2px solid rgba(255,255,255,.08);
 }
 
 .logo{
-  font-size:25px;
-  font-weight:1000;
-  letter-spacing:1px;
-  color:#ffd52e;
-  text-shadow:3px 3px 0 #7b3ff2;
-  white-space:nowrap;
+    font-size:26px;
+    font-weight:1000;
+
+    color:#ffd52e;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        3px 3px 0 #7b3ff2,
+        5px 5px 0 #000;
 }
 
 nav{
-  display:flex;
-  gap:8px;
+    display:flex;
+    gap:8px;
 }
 
 nav a{
-  padding:9px 13px;
-  border-radius:12px;
-  font-weight:900;
-  transition:.2s;
+    padding:10px 14px;
+
+    border-radius:13px;
+
+    font-weight:1000;
+
+    transition:.2s;
 }
 
 nav a:hover{
-  background:#ffd52e;
-  color:#111;
-  transform:translateY(-2px);
+    background:#ffd52e;
+    color:#111;
+
+    transform:translateY(-2px);
 }
 
-.language{
-  display:flex;
-  align-items:center;
-  gap:6px;
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.language-picker{
+    position:relative;
+    z-index:10000;
 }
 
-.language select{
-  background:#20202d;
-  color:#fff;
-  border:2px solid #44445a;
-  border-radius:12px;
-  padding:8px 10px;
-  font-weight:800;
+.language-button{
+    border:2px solid #45455a;
+
+    background:#1c1c29;
+
+    color:#fff;
+
+    border-radius:13px;
+
+    padding:9px 12px;
+
+    min-width:80px;
+
+    font-weight:1000;
 }
 
-/* HERO */
+.language-button:hover{
+    border-color:#ffd52e;
+}
+
+.language-menu{
+    position:absolute;
+
+    top:calc(100% + 8px);
+    right:0;
+
+    width:180px;
+
+    padding:7px;
+
+    background:#15151f;
+
+    border:2px solid #3c3c50;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.6);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(-8px);
+
+    transition:.18s;
+}
+
+.language-picker.open .language-menu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+.language-menu button{
+    width:100%;
+
+    border:0;
+
+    background:transparent;
+
+    color:#fff;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-align:left;
+
+    font-weight:900;
+}
+
+.language-menu button:hover{
+    background:#292938;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
-  min-height:650px;
-  padding:75px 5% 40px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  align-items:center;
-  gap:40px;
-  position:relative;
+    min-height:650px;
+
+    padding:70px 5% 40px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:40px;
+
+    position:relative;
 }
 
 .hero-content{
-  position:relative;
-  z-index:3;
+    position:relative;
+    z-index:5;
 }
 
 .badge{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:999px;
-  background:#ffd52e;
-  color:#111;
-  font-weight:1000;
-  transform:rotate(-2deg);
-  margin-bottom:18px;
-  box-shadow:5px 5px 0 #7b3ff2;
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:#ffd52e;
+
+    color:#111;
+
+    font-size:12px;
+
+    font-weight:1000;
+
+    box-shadow:
+        5px 5px 0 #7b3ff2;
+
+    transform:rotate(-2deg);
+
+    margin-bottom:20px;
 }
 
 .hero h1{
-  font-size:clamp(45px,7vw,88px);
-  line-height:.9;
-  font-weight:1000;
-  letter-spacing:-4px;
-  text-transform:uppercase;
-  text-shadow:
-    5px 5px 0 #7b3ff2,
-    9px 9px 0 rgba(0,0,0,.45);
+    font-size:clamp(50px,7vw,90px);
+
+    line-height:.88;
+
+    font-weight:1000;
+
+    letter-spacing:-5px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        5px 5px 0 #7b3ff2,
+        9px 9px 0 #000;
 }
 
 .hero h1 span{
-  color:#ffd52e;
+    color:#ffd52e;
 }
 
 .hero p{
-  max-width:650px;
-  margin:25px 0;
-  font-size:19px;
-  line-height:1.6;
-  color:#c5c5d3;
+    max-width:650px;
+
+    margin:27px 0;
+
+    color:#c7c7d5;
+
+    font-size:19px;
+
+    line-height:1.6;
 }
 
 .hero-buttons{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
 }
 
 .big-btn{
-  border:0;
-  padding:15px 23px;
-  border-radius:15px;
-  background:#ffd52e;
-  color:#111;
-  font-weight:1000;
-  box-shadow:0 7px 0 #b98900;
-  transition:.18s;
+    border:0;
+
+    padding:15px 23px;
+
+    border-radius:15px;
+
+    background:#ffd52e;
+
+    color:#111;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 6px 0 #ad8200;
+
+    transition:.18s;
 }
 
 .big-btn:hover{
-  transform:translateY(3px);
-  box-shadow:0 4px 0 #b98900;
+    transform:translateY(3px);
+
+    box-shadow:
+        0 3px 0 #ad8200;
 }
 
 .big-btn.secondary{
-  background:#7b3ff2;
-  color:#fff;
-  box-shadow:0 7px 0 #4f229f;
+    background:#7b3ff2;
+
+    color:#fff;
+
+    box-shadow:
+        0 6px 0 #4d229d;
 }
 
-/* SHADE */
+/* =========================================================
+   SHADE
+========================================================= */
 
 .hero-character{
-  min-height:470px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    min-height:500px;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 }
 
 .character-glow{
-  position:absolute;
-  width:350px;
-  height:350px;
-  border-radius:50%;
-  background:#8d4cff;
-  filter:blur(70px);
-  opacity:.42;
-  animation:glow 3s ease-in-out infinite;
+    position:absolute;
+
+    width:370px;
+    height:370px;
+
+    border-radius:50%;
+
+    background:#8647ef;
+
+    filter:blur(70px);
+
+    opacity:.4;
+
+    animation:glow 3s infinite;
 }
 
 .shade-character{
-  position:relative;
-  width:min(430px,90vw);
-  height:500px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  animation:shadeFloat 3s ease-in-out infinite;
-  z-index:2;
+    position:relative;
+
+    width:min(460px,90vw);
+    height:500px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:flex-end;
+
+    z-index:3;
+
+    animation:floatShade 3s ease-in-out infinite;
 }
 
 .shade-character img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center bottom;
-  filter:
-    drop-shadow(0 20px 12px rgba(0,0,0,.5))
-    drop-shadow(0 0 25px rgba(139,76,255,.45));
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 20px 10px rgba(0,0,0,.6))
+        drop-shadow(0 0 25px rgba(125,65,245,.5));
 }
 
 .wave-hand{
-  position:absolute;
-  right:8%;
-  top:17%;
-  font-size:65px;
-  transform-origin:bottom center;
-  animation:wave 1.1s ease-in-out infinite;
-  filter:drop-shadow(4px 5px 0 rgba(0,0,0,.3));
+    position:absolute;
+
+    right:4%;
+    top:15%;
+
+    font-size:65px;
+
+    transform-origin:bottom center;
+
+    animation:wave 1s infinite ease-in-out;
+
+    filter:
+        drop-shadow(4px 5px 0 rgba(0,0,0,.4));
 }
 
 .character-name{
-  position:absolute;
-  bottom:15px;
-  background:#171725;
-  border:3px solid #ffd52e;
-  padding:10px 20px;
-  border-radius:15px;
-  font-weight:1000;
-  box-shadow:5px 5px 0 #7b3ff2;
+    position:absolute;
+
+    bottom:10px;
+
+    padding:10px 20px;
+
+    border-radius:14px;
+
+    background:#171724;
+
+    border:3px solid #ffd52e;
+
+    font-weight:1000;
+
+    box-shadow:
+        5px 5px 0 #7b3ff2;
 }
 
-@keyframes shadeFloat{
-  0%,100%{transform:translateY(0) rotate(-1deg)}
-  50%{transform:translateY(-15px) rotate(1deg)}
+@keyframes floatShade{
+
+    0%,100%{
+        transform:translateY(0) rotate(-1deg);
+    }
+
+    50%{
+        transform:translateY(-14px) rotate(1deg);
+    }
+
 }
 
 @keyframes wave{
-  0%,100%{transform:rotate(15deg)}
-  50%{transform:rotate(-25deg)}
+
+    0%,100%{
+        transform:rotate(15deg);
+    }
+
+    50%{
+        transform:rotate(-25deg);
+    }
+
 }
 
 @keyframes glow{
-  0%,100%{transform:scale(1);opacity:.35}
-  50%{transform:scale(1.15);opacity:.5}
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.35;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:.5;
+    }
+
 }
 
-/* SECTIONS */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 section{
-  padding:80px 5%;
-  position:relative;
+    padding:80px 5%;
+
+    position:relative;
 }
 
 .section-title{
-  margin-bottom:35px;
+    margin-bottom:35px;
+}
+
+.news-kicker{
+    display:inline-block;
+
+    padding:7px 13px;
+
+    margin-bottom:12px;
+
+    background:#ffd52e;
+
+    color:#111;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:1000;
+
+    box-shadow:
+        4px 4px 0 #7b3ff2;
+
+    transform:rotate(-2deg);
 }
 
 .section-title h2{
-  display:inline-block;
-  font-size:42px;
-  font-weight:1000;
-  text-transform:uppercase;
-  text-shadow:4px 4px 0 #7b3ff2;
+    display:inline-block;
+
+    font-size:43px;
+
+    font-weight:1000;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        4px 4px 0 #7b3ff2;
 }
 
 .section-title p{
-  margin-top:8px;
-  color:#aaaaba;
+    margin-top:9px;
+
+    color:#aaaabb;
 }
 
-/* NEWS */
+/* =========================================================
+   NEWS
+========================================================= */
 
 .news-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:25px;
 }
 
 .news-card{
-  background:linear-gradient(145deg,#1b1b2a,#11111b);
-  border:2px solid #38384c;
-  border-radius:22px;
-  padding:22px;
-  min-height:220px;
-  position:relative;
-  overflow:hidden;
-  transition:.25s;
-}
+    min-height:410px;
 
-.news-card:after{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  background:#7b3ff2;
-  border-radius:50%;
-  right:-50px;
-  bottom:-50px;
-  filter:blur(20px);
-  opacity:.5;
+    position:relative;
+
+    overflow:hidden;
+
+    background:#11111b;
+
+    border:3px solid #37374c;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 12px 0 rgba(0,0,0,.3);
+
+    transition:.25s;
 }
 
 .news-card:hover{
-  transform:translateY(-7px) rotate(-1deg);
-  border-color:#ffd52e;
+    transform:
+        translateY(-9px)
+        rotate(-.5deg);
+
+    border-color:#ffd52e;
+
+    box-shadow:
+        0 18px 0 rgba(0,0,0,.3),
+        0 0 35px rgba(123,63,242,.25);
 }
 
-.news-icon{
-  font-size:38px;
-  margin-bottom:15px;
+.news-image{
+    height:245px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #8b4bf0,
+            #292142 48%,
+            #10101a
+        );
 }
 
-.news-card h3{
-  font-size:22px;
-  margin-bottom:10px;
+.news-image:after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 20%,
+            rgba(10,10,18,.08) 40%,
+            rgba(10,10,18,.96) 100%
+        );
 }
 
-.news-card p{
-  color:#b8b8c8;
-  line-height:1.5;
+.news-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    object-position:center bottom;
+
+    transform:scale(1.08);
+
+    filter:
+        drop-shadow(0 17px 12px rgba(0,0,0,.6));
+
+    transition:.35s;
 }
 
-/* BUILD SEARCH */
+.news-card:hover .news-image img{
+    transform:
+        scale(1.18)
+        translateY(-5px);
+}
+
+.news-badge{
+    position:absolute;
+
+    z-index:5;
+
+    top:15px;
+    left:15px;
+
+    padding:7px 11px;
+
+    border-radius:10px;
+
+    background:#ffd52e;
+
+    color:#111;
+
+    font-size:11px;
+
+    font-weight:1000;
+
+    box-shadow:
+        3px 3px 0 #7b3ff2;
+}
+
+.news-date{
+    position:absolute;
+
+    z-index:5;
+
+    top:15px;
+    right:15px;
+
+    padding:7px 10px;
+
+    border-radius:10px;
+
+    background:rgba(5,5,12,.8);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+.news-content{
+    position:relative;
+
+    z-index:5;
+
+    padding:20px 22px 25px;
+
+    margin-top:-35px;
+}
+
+.news-content h3{
+    font-size:26px;
+
+    line-height:1.05;
+
+    font-weight:1000;
+
+    margin-bottom:10px;
+
+    text-shadow:
+        2px 2px 0 #7b3ff2;
+}
+
+.news-content p{
+    color:#bcbccc;
+
+    line-height:1.55;
+
+    font-size:14px;
+}
+
+.news-footer{
+    margin-top:17px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.news-tag{
+    color:#ffd52e;
+
+    font-size:11px;
+
+    font-weight:1000;
+}
+
+.news-arrow{
+    width:37px;
+    height:37px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#7b3ff2;
+
+    font-weight:1000;
+
+    transition:.2s;
+}
+
+.news-card:hover .news-arrow{
+    background:#ffd52e;
+
+    color:#111;
+
+    transform:translateX(5px);
+}
+
+/* =========================================================
+   BUILDS
+========================================================= */
 
 .build-layout{
-  display:grid;
-  grid-template-columns:320px 1fr;
-  gap:25px;
+    display:grid;
+
+    grid-template-columns:320px 1fr;
+
+    gap:25px;
 }
 
 .brawler-sidebar,
 .build-panel{
-  background:rgba(20,20,31,.94);
-  border:2px solid #37374b;
-  border-radius:24px;
-  padding:20px;
+    background:rgba(19,19,30,.95);
+
+    border:2px solid #39394d;
+
+    border-radius:25px;
+
+    padding:20px;
 }
 
 .search-box{
-  width:100%;
-  padding:14px 15px;
-  border-radius:14px;
-  border:2px solid #44445a;
-  background:#0d0d16;
-  color:#fff;
-  outline:none;
-  margin-bottom:15px;
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:15px;
+
+    border-radius:14px;
+
+    border:2px solid #414157;
+
+    background:#0c0c14;
+
+    color:#fff;
+
+    outline:none;
 }
 
 .search-box:focus{
-  border-color:#ffd52e;
+    border-color:#ffd52e;
 }
 
 .brawler-list{
-  max-height:570px;
-  overflow:auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  padding-right:4px;
+    max-height:570px;
+
+    overflow:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
 }
 
 .brawler-btn{
-  border:2px solid #353548;
-  background:#181824;
-  color:#fff;
-  border-radius:13px;
-  padding:8px;
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:12px;
-  font-weight:900;
-  transition:.15s;
+    border:2px solid #353548;
+
+    background:#181824;
+
+    color:#fff;
+
+    border-radius:13px;
+
+    padding:7px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    transition:.15s;
 }
 
 .brawler-btn img{
-  width:35px;
-  height:35px;
-  object-fit:contain;
+    width:36px;
+    height:36px;
+
+    object-fit:contain;
 }
 
 .brawler-btn:hover,
 .brawler-btn.active{
-  border-color:#ffd52e;
-  background:#292635;
-  transform:scale(1.03);
+    border-color:#ffd52e;
+
+    background:#292636;
+
+    transform:scale(1.03);
 }
 
 .build-header{
-  display:grid;
-  grid-template-columns:230px 1fr;
-  gap:25px;
-  align-items:center;
+    display:grid;
+
+    grid-template-columns:230px 1fr;
+
+    gap:25px;
+
+    align-items:center;
 }
 
 .selected-character{
-  height:320px;
-  background:
-    radial-gradient(circle,#6538ae 0%,#27203b 42%,#11111b 72%);
-  border-radius:22px;
-  border:2px solid #4a4165;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  overflow:hidden;
+    height:330px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:
+        radial-gradient(
+            circle,
+            #7040bc,
+            #29213d 45%,
+            #11111a 75%
+        );
+
+    border:2px solid #4d4369;
 }
 
 .selected-character img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 15px 10px rgba(0,0,0,.5));
-  transition:.25s;
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 17px 10px rgba(0,0,0,.6));
+
+    transition:.25s;
 }
 
 .selected-character img:hover{
-  transform:scale(1.07);
+    transform:scale(1.08);
 }
 
 .build-name{
-  font-size:48px;
-  font-weight:1000;
-  text-transform:uppercase;
-  text-shadow:4px 4px 0 #7b3ff2;
+    font-size:48px;
+
+    font-weight:1000;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        4px 4px 0 #7b3ff2;
 }
 
 .build-class{
-  color:#ffd52e;
-  font-weight:900;
-  margin:8px 0 18px;
+    color:#ffd52e;
+
+    font-weight:1000;
+
+    margin:9px 0 18px;
 }
 
 .build-description{
-  color:#bdbdcc;
-  line-height:1.5;
+    color:#bdbdcc;
+
+    line-height:1.55;
 }
 
 .build-items{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:15px;
+
+    margin-top:25px;
 }
 
 .build-item{
-  background:#11111a;
-  border:2px solid #303044;
-  border-radius:18px;
-  padding:18px;
-  min-height:125px;
+    min-height:135px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:#11111a;
+
+    border:2px solid #303044;
 }
 
 .build-item h4{
-  color:#ffd52e;
-  margin-bottom:10px;
-  text-transform:uppercase;
-  font-size:13px;
+    color:#ffd52e;
+
+    font-size:13px;
+
+    margin-bottom:10px;
+
+    text-transform:uppercase;
 }
 
 .build-item strong{
-  font-size:19px;
+    font-size:18px;
 }
 
 .build-item p{
-  color:#aaaabb;
-  margin-top:7px;
-  line-height:1.4;
+    margin-top:7px;
+
+    color:#aaaabb;
+
+    line-height:1.4;
 }
 
 .ability-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 }
 
 .ability-icon{
-  width:50px;
-  height:50px;
-  object-fit:contain;
-  border-radius:12px;
+    width:50px;
+    height:50px;
+
+    object-fit:contain;
+
+    border-radius:12px;
 }
 
-/* OPINIONS */
+/* =========================================================
+   OPINIONS
+========================================================= */
 
 .opinions-wrap{
-  position:relative;
-  max-width:1100px;
-  margin:auto;
+    position:relative;
+
+    max-width:1100px;
+
+    margin:auto;
 }
 
 .opinions-card{
-  position:relative;
-  z-index:3;
-  background:rgba(19,19,28,.96);
-  border:3px solid #ffd52e;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 15px 0 rgba(123,63,242,.55);
+    position:relative;
+
+    z-index:3;
+
+    padding:30px;
+
+    border-radius:28px;
+
+    background:rgba(18,18,28,.97);
+
+    border:3px solid #ffd52e;
+
+    box-shadow:
+        0 15px 0 rgba(123,63,242,.55);
 }
 
 .opinions-card h2{
-  font-size:40px;
-  text-align:center;
-  font-weight:1000;
-  text-shadow:4px 4px 0 #7b3ff2;
-  margin-bottom:25px;
+    text-align:center;
+
+    font-size:40px;
+
+    font-weight:1000;
+
+    margin-bottom:25px;
+
+    text-shadow:
+        4px 4px 0 #7b3ff2;
 }
 
 .form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
+    display:grid;
 
-.form-control{
-  width:100%;
-  padding:14px;
-  background:#0d0d16;
-  border:2px solid #3b3b50;
-  border-radius:13px;
-  color:#fff;
-  outline:none;
-}
+    grid-template-columns:1fr 1fr;
 
-textarea.form-control{
-  min-height:130px;
-  resize:vertical;
+    gap:15px;
 }
 
 .form-full{
-  grid-column:1/-1;
+    grid-column:1/-1;
+}
+
+.form-control{
+    width:100%;
+
+    margin-top:7px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    background:#0c0c14;
+
+    border:2px solid #3b3b50;
+
+    color:#fff;
+
+    outline:none;
+}
+
+textarea.form-control{
+    min-height:130px;
+
+    resize:vertical;
 }
 
 .stars{
-  display:flex;
-  gap:5px;
-  margin-top:7px;
+    display:flex;
+
+    gap:5px;
+
+    margin-top:5px;
 }
 
 .star{
-  font-size:32px;
-  color:#444;
-  cursor:pointer;
-  transition:.12s;
+    font-size:32px;
+
+    color:#454554;
+
+    transition:.12s;
+
+    cursor:pointer;
 }
 
 .star:hover,
 .star.active{
-  color:#ffd52e;
-  transform:scale(1.15);
+    color:#ffd52e;
+
+    transform:scale(1.15);
 }
 
 .submit-btn{
-  margin-top:15px;
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:14px;
-  background:#ffd52e;
-  color:#111;
-  font-weight:1000;
-  box-shadow:0 5px 0 #ae8200;
+    width:100%;
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#ffd52e;
+
+    color:#111;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 5px 0 #ad8200;
 }
 
 .reviews{
-  margin-top:25px;
-  display:grid;
-  gap:12px;
+    display:grid;
+
+    gap:12px;
+
+    margin-top:25px;
 }
 
 .review{
-  background:#14141f;
-  border:2px solid #303044;
-  padding:15px;
-  border-radius:16px;
+    padding:15px;
+
+    border-radius:16px;
+
+    background:#14141f;
+
+    border:2px solid #303044;
 }
 
 .review-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:8px;
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:8px;
 }
 
 .review-stars{
-  color:#ffd52e;
+    color:#ffd52e;
 }
 
-/* SIDE CHARACTERS */
+/* =========================================================
+   COLT + DARRYL
+========================================================= */
 
 .side-character{
-  position:absolute;
-  bottom:-15px;
-  width:250px;
-  height:350px;
-  z-index:2;
-  pointer-events:none;
-  animation:sideFloat 3.4s ease-in-out infinite;
+    position:absolute;
+
+    bottom:-10px;
+
+    width:260px;
+    height:360px;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    animation:sideFloat 3.4s infinite ease-in-out;
 }
 
 .side-character img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 15px 10px rgba(0,0,0,.55));
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 17px 10px rgba(0,0,0,.65));
 }
 
 .side-left{
-  left:-45px;
-  transform:rotate(-8deg);
+    left:-55px;
+
+    transform:rotate(-8deg);
 }
 
 .side-right{
-  right:-45px;
-  transform:rotate(8deg);
-  animation-delay:1s;
+    right:-55px;
+
+    transform:rotate(8deg);
+
+    animation-delay:1s;
 }
 
 @keyframes sideFloat{
-  0%,100%{transform:translateY(0) rotate(-8deg)}
-  50%{transform:translateY(-12px) rotate(-4deg)}
-}
 
-.side-right{
-  animation-name:sideFloatRight;
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(-8deg);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(-4deg);
+    }
+
 }
 
 @keyframes sideFloatRight{
-  0%,100%{transform:translateY(0) rotate(8deg)}
-  50%{transform:translateY(-12px) rotate(4deg)}
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(8deg);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(4deg);
+    }
+
 }
 
-/* FOOTER */
+.side-right{
+    animation-name:sideFloatRight;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
-  padding:35px 5%;
-  text-align:center;
-  color:#858596;
-  border-top:2px solid #252535;
-  background:#08080e;
+    padding:40px 5%;
+
+    text-align:center;
+
+    color:#858596;
+
+    background:#08080e;
+
+    border-top:2px solid #252535;
 }
 
 footer strong{
-  color:#ffd52e;
+    color:#ffd52e;
 }
 
-/* SCROLLBAR */
+/* =========================================================
+   SCROLLBAR
+========================================================= */
 
 ::-webkit-scrollbar{
-  width:9px;
+    width:9px;
 }
 
 ::-webkit-scrollbar-track{
-  background:#0a0a10;
+    background:#09090f;
 }
 
 ::-webkit-scrollbar-thumb{
-  background:#5530a5;
-  border-radius:20px;
+    background:#5933aa;
+
+    border-radius:20px;
 }
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:1050px){
-  .news-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
 
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
+    .hero{
+        grid-template-columns:1fr;
 
-  .hero p{
-    margin-left:auto;
-    margin-right:auto;
-  }
+        text-align:center;
+    }
 
-  .hero-buttons{
-    justify-content:center;
-  }
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
 
-  .build-layout{
-    grid-template-columns:1fr;
-  }
+    .hero-buttons{
+        justify-content:center;
+    }
 
-  .side-character{
-    opacity:.25;
-  }
+    .news-grid{
+        grid-template-columns:1fr;
+    }
+
+    .build-layout{
+        grid-template-columns:1fr;
+    }
+
+    .side-character{
+        opacity:.22;
+    }
 }
 
 @media(max-width:700px){
-  header{
-    flex-wrap:wrap;
-  }
 
-  nav{
-    order:3;
-    width:100%;
-    justify-content:center;
-  }
+    header{
+        flex-wrap:wrap;
+    }
 
-  .news-grid{
-    grid-template-columns:1fr;
-  }
+    nav{
+        order:3;
 
-  .build-header{
-    grid-template-columns:1fr;
-  }
+        width:100%;
 
-  .build-items{
-    grid-template-columns:1fr;
-  }
+        justify-content:center;
+    }
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+    .hero{
+        padding-top:50px;
+    }
 
-  .form-full{
-    grid-column:auto;
-  }
+    .build-header{
+        grid-template-columns:1fr;
+    }
 
-  .build-name{
-    font-size:36px;
-  }
+    .build-items{
+        grid-template-columns:1fr;
+    }
 
-  .side-character{
-    display:none;
-  }
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-  section{
-    padding:55px 4%;
-  }
+    .form-full{
+        grid-column:auto;
+    }
+
+    .build-name{
+        font-size:36px;
+    }
+
+    .side-character{
+        display:none;
+    }
+
+    section{
+        padding:55px 4%;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
 <header>
-  <div class="logo">SHADE BRAWL</div>
 
-  <nav>
-    <a href="#news">📰 News</a>
-    <a href="#builds">⚡ Builds</a>
-    <a href="#opinions">⭐ Opinions</a>
-  </nav>
+    <div class="logo">
+        SHADE BRAWL
+    </div>
 
-  <div class="language">
-    <span id="languageFlag">🇵🇱</span>
-    <select id="languageSelect">
-      <option value="pl">🇵🇱 Polski</option>
-      <option value="en">🇬🇧 English</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="it">🇮🇹 Italiano</option>
-      <option value="fr">🇫🇷 Français</option>
-    </select>
-  </div>
+
+    <nav>
+
+        <a href="#news">
+            📰 <span data-i18n="navNews">News</span>
+        </a>
+
+        <a href="#builds">
+            ⚡ <span data-i18n="navBuilds">Builds</span>
+        </a>
+
+        <a href="#opinions">
+            ⭐ <span data-i18n="navOpinions">Opinions</span>
+        </a>
+
+    </nav>
+
+
+    <div class="language-picker">
+
+        <button
+            id="languageButton"
+            class="language-button"
+        >
+            🇵🇱 PL ▾
+        </button>
+
+
+        <div
+            id="languageMenu"
+            class="language-menu"
+        >
+
+            <button data-lang="pl">
+                🇵🇱 Polski
+            </button>
+
+            <button data-lang="en">
+                🇬🇧 English
+            </button>
+
+            <button data-lang="es">
+                🇪🇸 Español
+            </button>
+
+            <button data-lang="it">
+                🇮🇹 Italiano
+            </button>
+
+            <button data-lang="fr">
+                🇫🇷 Français
+            </button>
+
+        </div>
+
+    </div>
+
 </header>
 
 
-<!-- HERO -->
+<!-- =======================================================
+     HERO
+======================================================= -->
 
 <section class="hero">
 
-  <div class="hero-content">
-    <div class="badge" data-i18n="fanSite">FAN SITE • BRAWL STARS</div>
 
-    <h1>
-      <span>Hello</span><br>
-      Player!
-    </h1>
+    <div class="hero-content">
 
-    <p data-i18n="heroText">
-      Welcome to SHADE BRAWL — a fan-made place for Brawl Stars news,
-      brawler builds, opinions and useful tips.
-    </p>
+        <div
+            class="badge"
+            data-i18n="fanSite"
+        >
+            FAN SITE • BRAWL STARS
+        </div>
 
-    <div class="hero-buttons">
-      <a href="#news" class="big-btn" data-i18n="readNews">READ NEWS</a>
-      <a href="#builds" class="big-btn secondary" data-i18n="findBuild">FIND A BUILD</a>
+
+        <h1>
+
+            <span data-i18n="hello">
+                Hello
+            </span>
+
+            <br>
+
+            Player!
+
+        </h1>
+
+
+        <p data-i18n="heroText">
+
+            Witaj na SHADE BRAWL — fanowskiej stronie
+            z newsami, buildami brawlerów,
+            opiniami i poradami.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#news"
+                class="big-btn"
+                data-i18n="readNews"
+            >
+                CZYTAJ NEWSY
+            </a>
+
+
+            <a
+                href="#builds"
+                class="big-btn secondary"
+                data-i18n="findBuild"
+            >
+                ZNAJDŹ BUILD
+            </a>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="hero-character">
-    <div class="character-glow"></div>
 
-    <div class="shade-character">
-      <!-- Shade default model -->
-      <img
-        src="https://cdn.brawlify.com/brawlers/model/16000086.png"
-        alt="Shade Brawl Stars"
-        onerror="this.src='https://cdn.brawlify.com/brawlers/borderless/16000086.png'"
-      >
 
-      <div class="wave-hand">👋</div>
+    <div class="hero-character">
 
-      <div class="character-name">SHADE</div>
+        <div class="character-glow"></div>
+
+
+        <div class="shade-character">
+
+            <img
+                src="https://cdn.brawlify.com/brawlers/model/16000086.png"
+                alt="Shade"
+                onerror="
+                    this.src=
+                    'https://cdn.brawlify.com/brawlers/borderless/16000086.png'
+                "
+            >
+
+
+            <div class="wave-hand">
+                👋
+            </div>
+
+
+            <div class="character-name">
+                SHADE
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
 </section>
 
 
-<!-- NEWS -->
+
+<!-- =======================================================
+     NEWS
+======================================================= -->
 
 <section id="news">
 
-  <div class="section-title">
-    <h2 data-i18n="latestNews">Latest News</h2>
-    <p data-i18n="newsSubtitle">
-      Najważniejsze rzeczy, które dzieją się w Brawl Stars.
-    </p>
-  </div>
 
-  <div class="news-grid">
+    <div class="section-title">
 
-    <article class="news-card">
-      <div class="news-icon">👻</div>
-      <h3>Shade is here</h3>
-      <p>
-        Shade brings his ghostly style, strange movement and close-range
-        pressure to the battlefield.
-      </p>
-    </article>
+        <div
+            class="news-kicker"
+            data-i18n="newsKicker"
+        >
+            🔥 STARR PARK NEWSROOM
+        </div>
 
-    <article class="news-card">
-      <div class="news-icon">⚔️</div>
-      <h3>Balance changes</h3>
-      <p>
-        The meta keeps changing. Check your favourite brawler before
-        jumping into your next match.
-      </p>
-    </article>
 
-    <article class="news-card">
-      <div class="news-icon">🎃</div>
-      <h3>Brawl-O-Ween</h3>
-      <p>
-        Spooky content, special cosmetics and seasonal events continue
-        to make Starr Park more chaotic.
-      </p>
-    </article>
+        <h2 data-i18n="latestNews">
+            Najnowsze newsy
+        </h2>
 
-    <article class="news-card">
-      <div class="news-icon">🔥</div>
-      <h3>Meta watch</h3>
-      <p>
-        Try different builds instead of blindly copying one setup.
-        The best build depends on the map and mode.
-      </p>
-    </article>
 
-  </div>
+        <p data-i18n="newsSubtitle">
+            Najnowsze informacje ze świata Brawl Stars.
+        </p>
+
+    </div>
+
+
+    <div
+        id="newsGrid"
+        class="news-grid"
+    ></div>
+
 </section>
 
 
-<!-- BUILDS -->
+
+<!-- =======================================================
+     BUILDS
+======================================================= -->
 
 <section id="builds">
 
-  <div class="section-title">
-    <h2 data-i18n="brawlerBuilds">Brawler Builds</h2>
-    <p data-i18n="buildSubtitle">
-      Wyszukaj brawlera i zobacz jego prawdziwy model oraz umiejętności.
-    </p>
-  </div>
 
-  <div class="build-layout">
+    <div class="section-title">
 
-    <aside class="brawler-sidebar">
-
-      <input
-        id="brawlerSearch"
-        class="search-box"
-        type="text"
-        placeholder="🔎 Search brawler..."
-      >
-
-      <div id="brawlerList" class="brawler-list">
-        Ładowanie brawlerów...
-      </div>
-
-    </aside>
+        <h2 data-i18n="brawlerBuilds">
+            Buildy brawlerów
+        </h2>
 
 
-    <main class="build-panel">
+        <p data-i18n="buildSubtitle">
+            Wyszukaj brawlera i zobacz jego model
+            oraz umiejętności.
+        </p>
 
-      <div class="build-header">
-
-        <div class="selected-character">
-          <img
-            id="selectedImage"
-            src="https://cdn.brawlify.com/brawlers/model/16000086.png"
-            alt="Selected brawler"
-          >
-        </div>
-
-        <div>
-          <div id="selectedName" class="build-name">SHADE</div>
-          <div id="selectedClass" class="build-class">ASSASSIN</div>
-          <p id="selectedDescription" class="build-description">
-            Loading brawler information...
-          </p>
-        </div>
-
-      </div>
+    </div>
 
 
-      <div class="build-items">
 
-        <div class="build-item">
-          <h4>Gadget</h4>
+    <div class="build-layout">
 
-          <div class="ability-row">
-            <img id="gadgetIcon" class="ability-icon" src="">
-            <div>
-              <strong id="gadgetName">—</strong>
-              <p id="gadgetDescription">—</p>
+
+        <aside class="brawler-sidebar">
+
+
+            <input
+                id="brawlerSearch"
+                class="search-box"
+                type="text"
+                placeholder="🔎 Szukaj brawlera..."
+            >
+
+
+            <div
+                id="brawlerList"
+                class="brawler-list"
+            >
+
+                Ładowanie...
+
             </div>
-          </div>
-        </div>
 
 
-        <div class="build-item">
-          <h4>Star Power</h4>
+        </aside>
 
-          <div class="ability-row">
-            <img id="starIcon" class="ability-icon" src="">
-            <div>
-              <strong id="starName">—</strong>
-              <p id="starDescription">—</p>
+
+
+        <main class="build-panel">
+
+
+            <div class="build-header">
+
+
+                <div class="selected-character">
+
+                    <img
+                        id="selectedImage"
+                        src="https://cdn.brawlify.com/brawlers/model/16000086.png"
+                        alt="Selected brawler"
+                    >
+
+                </div>
+
+
+
+                <div>
+
+                    <div
+                        id="selectedName"
+                        class="build-name"
+                    >
+                        SHADE
+                    </div>
+
+
+                    <div
+                        id="selectedClass"
+                        class="build-class"
+                    >
+                        ASSASSIN
+                    </div>
+
+
+                    <p
+                        id="selectedDescription"
+                        class="build-description"
+                    >
+                        Ładowanie danych brawlera...
+                    </p>
+
+                </div>
+
             </div>
-          </div>
-        </div>
 
 
-        <div class="build-item">
-          <h4>Hypercharge</h4>
 
-          <strong id="hyperName">Checking...</strong>
-          <p id="hyperDescription">
-            Dane zostaną pokazane, jeśli są dostępne.
-          </p>
-        </div>
+            <div class="build-items">
 
 
-        <div class="build-item">
-          <h4>Build tip</h4>
+                <div class="build-item">
 
-          <strong id="buildTip">—</strong>
-          <p>
-            Wybieraj build pod mapę, tryb i swój styl gry.
-          </p>
-        </div>
+                    <h4 data-i18n="gadget">
+                        Gadżet
+                    </h4>
 
-      </div>
 
-    </main>
+                    <div class="ability-row">
 
-  </div>
+                        <img
+                            id="gadgetIcon"
+                            class="ability-icon"
+                            src=""
+                            alt=""
+                        >
+
+
+                        <div>
+
+                            <strong id="gadgetName">
+                                —
+                            </strong>
+
+
+                            <p id="gadgetDescription">
+                                —
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="build-item">
+
+                    <h4 data-i18n="starPower">
+                        Gwiezdna moc
+                    </h4>
+
+
+                    <div class="ability-row">
+
+                        <img
+                            id="starIcon"
+                            class="ability-icon"
+                            src=""
+                            alt=""
+                        >
+
+
+                        <div>
+
+                            <strong id="starName">
+                                —
+                            </strong>
+
+
+                            <p id="starDescription">
+                                —
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="build-item">
+
+                    <h4 data-i18n="hypercharge">
+                        Hiperdoładowanie
+                    </h4>
+
+
+                    <strong id="hyperName">
+                        —
+                    </strong>
+
+
+                    <p id="hyperDescription">
+                        —
+                    </p>
+
+                </div>
+
+
+
+                <div class="build-item">
+
+                    <h4 data-i18n="buildTip">
+                        Porada do buildu
+                    </h4>
+
+
+                    <strong id="buildTip">
+                        —
+                    </strong>
+
+
+                    <p data-i18n="buildTipDefault">
+                        Dobierz build do mapy,
+                        trybu gry i własnego stylu.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
+    </div>
+
 </section>
 
 
-<!-- OPINIONS -->
+
+<!-- =======================================================
+     OPINIONS
+======================================================= -->
 
 <section id="opinions">
 
-  <div class="opinions-wrap">
 
-    <!-- REAL GAME CHARACTERS -->
-
-    <div class="side-character side-left">
-      <img
-        src="https://cdn.brawlify.com/brawlers/model/16000001.png"
-        alt="Colt"
-        onerror="this.src='https://cdn.brawlify.com/brawlers/borderless/16000001.png'"
-      >
-    </div>
-
-    <div class="side-character side-right">
-      <img
-        src="https://cdn.brawlify.com/brawlers/model/16000018.png"
-        alt="Darryl"
-        onerror="this.src='https://cdn.brawlify.com/brawlers/borderless/16000018.png'"
-      >
-    </div>
+    <div class="opinions-wrap">
 
 
-    <div class="opinions-card">
+        <!-- COLT -->
 
-      <h2 data-i18n="opinionsTitle">Your Opinion</h2>
+        <div class="side-character side-left">
 
-      <form id="opinionForm">
-
-        <div class="form-grid">
-
-          <div>
-            <label data-i18n="nickname">Nickname</label>
-            <input
-              id="nickname"
-              class="form-control"
-              maxlength="30"
-              required
-              placeholder="Your nickname"
+            <img
+                src="https://cdn.brawlify.com/brawlers/model/16000001.png"
+                alt="Colt"
+                onerror="
+                    this.src=
+                    'https://cdn.brawlify.com/brawlers/borderless/16000001.png'
+                "
             >
-          </div>
-
-          <div>
-            <label data-i18n="rating">Rating</label>
-
-            <div id="stars" class="stars">
-              <span class="star" data-rating="1">★</span>
-              <span class="star" data-rating="2">★</span>
-              <span class="star" data-rating="3">★</span>
-              <span class="star" data-rating="4">★</span>
-              <span class="star" data-rating="5">★</span>
-            </div>
-          </div>
-
-          <div class="form-full">
-            <label data-i18n="comment">Comment</label>
-
-            <textarea
-              id="comment"
-              class="form-control"
-              maxlength="500"
-              required
-              placeholder="What do you think about the site?"
-            ></textarea>
-          </div>
 
         </div>
 
-        <button class="submit-btn" type="submit" data-i18n="publish">
-          ⭐ PUBLISH OPINION
-        </button>
 
-      </form>
+        <!-- DARRYL -->
 
-      <div id="reviews" class="reviews"></div>
+        <div class="side-character side-right">
+
+            <img
+                src="https://cdn.brawlify.com/brawlers/model/16000018.png"
+                alt="Darryl"
+                onerror="
+                    this.src=
+                    'https://cdn.brawlify.com/brawlers/borderless/16000018.png'
+                "
+            >
+
+        </div>
+
+
+
+        <div class="opinions-card">
+
+
+            <h2 data-i18n="opinionsTitle">
+                Twoja opinia
+            </h2>
+
+
+
+            <form id="opinionForm">
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label data-i18n="nickname">
+                            Nick
+                        </label>
+
+
+                        <input
+                            id="nickname"
+                            class="form-control"
+                            maxlength="30"
+                            required
+                            placeholder="Twój nick"
+                        >
+
+                    </div>
+
+
+
+                    <div>
+
+                        <label data-i18n="rating">
+                            Ocena
+                        </label>
+
+
+                        <div
+                            id="stars"
+                            class="stars"
+                        >
+
+                            <span
+                                class="star"
+                                data-rating="1"
+                            >
+                                ★
+                            </span>
+
+                            <span
+                                class="star"
+                                data-rating="2"
+                            >
+                                ★
+                            </span>
+
+                            <span
+                                class="star"
+                                data-rating="3"
+                            >
+                                ★
+                            </span>
+
+                            <span
+                                class="star"
+                                data-rating="4"
+                            >
+                                ★
+                            </span>
+
+                            <span
+                                class="star"
+                                data-rating="5"
+                            >
+                                ★
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-full">
+
+                        <label data-i18n="comment">
+                            Komentarz
+                        </label>
+
+
+                        <textarea
+                            id="comment"
+                            class="form-control"
+                            maxlength="500"
+                            required
+                            placeholder="Co sądzisz o stronie?"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    data-i18n="publish"
+                >
+                    ⭐ OPUBLIKUJ OPINIĘ
+                </button>
+
+
+            </form>
+
+
+
+            <div
+                id="reviews"
+                class="reviews"
+            ></div>
+
+
+        </div>
 
     </div>
-
-  </div>
 
 </section>
 
 
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
 <footer>
-  <strong>SHADE BRAWL</strong>
-  <br><br>
-  Fan-made Brawl Stars website. Not affiliated with Supercell.
+
+    <strong>
+        SHADE BRAWL
+    </strong>
+
+    <br><br>
+
+    <span data-i18n="footer">
+        Fanowska strona Brawl Stars.
+        Nie jest powiązana z Supercell.
+    </span>
+
 </footer>
+
 
 
 <script>
 
 /* =========================================================
-   BRAWLIFY DATA
+   TRANSLATIONS
 ========================================================= */
 
-const API =
-  "https://api.brawlapi.com/v1/brawlers";
+const translations = {
+
+    pl:{
+
+        navNews:"News",
+        navBuilds:"Buildy",
+        navOpinions:"Opinie",
+
+        fanSite:"FAN SITE • BRAWL STARS",
+
+        hello:"Hello",
+
+        heroText:
+        "Witaj na SHADE BRAWL — fanowskiej stronie z newsami, buildami brawlerów, opiniami i poradami.",
+
+        readNews:"CZYTAJ NEWSY",
+
+        findBuild:"ZNAJDŹ BUILD",
+
+        latestNews:"Najnowsze newsy",
+
+        newsKicker:
+        "🔥 STARR PARK NEWSROOM",
+
+        newsSubtitle:
+        "Najnowsze informacje ze świata Brawl Stars.",
+
+        brawlerBuilds:
+        "Buildy brawlerów",
+
+        buildSubtitle:
+        "Wyszukaj brawlera i zobacz jego model oraz umiejętności.",
+
+        searchPlaceholder:
+        "🔎 Szukaj brawlera...",
+
+        gadget:"Gadżet",
+
+        starPower:"Gwiezdna moc",
+
+        hypercharge:"Hiperdoładowanie",
+
+        buildTip:"Porada do buildu",
+
+        buildTipDefault:
+        "Dobierz build do mapy, trybu gry i własnego stylu.",
+
+        opinionsTitle:
+        "Twoja opinia",
+
+        nickname:"Nick",
+
+        rating:"Ocena",
+
+        comment:"Komentarz",
+
+        publish:"⭐ OPUBLIKUJ OPINIĘ",
+
+        nicknamePlaceholder:
+        "Twój nick",
+
+        opinionPlaceholder:
+        "Co sądzisz o stronie?",
+
+        ratingRequired:
+        "Najpierw wybierz ocenę od 1 do 5 gwiazdek.",
+
+        noData:"Brak danych",
+
+        loading:"Ładowanie...",
+
+        noAbility:
+        "Brak danych o tej umiejętności.",
+
+        hyperData:
+        "Dane hiperdoładowania są dostępne, jeśli baza je udostępnia.",
+
+        newsTag:"BRAWL STARS NEWS",
+
+        footer:
+        "Fanowska strona Brawl Stars. Nie jest powiązana z Supercell."
+
+    },
 
 
-const fallbackBrawlers = [
-  {id:16000000,name:"Shelly"},
-  {id:16000001,name:"Colt"},
-  {id:16000002,name:"Bull"},
-  {id:16000003,name:"Brock"},
-  {id:16000004,name:"Rico"},
-  {id:16000005,name:"Spike"},
-  {id:16000006,name:"Barley"},
-  {id:16000007,name:"Jessie"},
-  {id:16000008,name:"Nita"},
-  {id:16000009,name:"Dynamike"},
-  {id:16000010,name:"El Primo"},
-  {id:16000011,name:"Mortis"},
-  {id:16000012,name:"Crow"},
-  {id:16000013,name:"Poco"},
-  {id:16000014,name:"Bo"},
-  {id:16000015,name:"Piper"},
-  {id:16000016,name:"Pam"},
-  {id:16000017,name:"Tara"},
-  {id:16000018,name:"Darryl"},
-  {id:16000019,name:"Penny"},
-  {id:16000020,name:"Frank"},
-  {id:16000021,name:"Gene"},
-  {id:16000022,name:"Tick"},
-  {id:16000023,name:"Leon"},
-  {id:16000024,name:"Rosa"},
-  {id:16000025,name:"Carl"},
-  {id:16000026,name:"Bibi"},
-  {id:16000027,name:"8-Bit"},
-  {id:16000028,name:"Sandy"},
-  {id:16000029,name:"Bea"},
-  {id:16000030,name:"Emz"},
-  {id:16000031,name:"Mr. P"},
-  {id:16000032,name:"Max"},
-  {id:16000033,name:"Jacky"},
-  {id:16000034,name:"Gale"},
-  {id:16000035,name:"Nani"},
-  {id:16000036,name:"Sprout"},
-  {id:16000037,name:"Surge"},
-  {id:16000038,name:"Colette"},
-  {id:16000039,name:"Amber"},
-  {id:16000040,name:"Lou"},
-  {id:16000041,name:"Byron"},
-  {id:16000042,name:"Edgar"},
-  {id:16000043,name:"Griff"},
-  {id:16000044,name:"Grom"},
-  {id:16000045,name:"Bonnie"},
-  {id:16000046,name:"Fang"},
-  {id:16000047,name:"Eve"},
-  {id:16000048,name:"Janet"},
-  {id:16000049,name:"Otis"},
-  {id:16000050,name:"Buster"},
-  {id:16000051,name:"Gray"},
-  {id:16000052,name:"R-T"},
-  {id:16000053,name:"Willow"},
-  {id:16000054,name:"Maisie"},
-  {id:16000055,name:"Hank"},
-  {id:16000056,name:"Cordelius"},
-  {id:16000057,name:"Doug"},
-  {id:16000058,name:"Chuck"},
-  {id:16000059,name:"Charlie"},
-  {id:16000060,name:"Mico"},
-  {id:16000061,name:"Melodie"},
-  {id:16000062,name:"Lily"},
-  {id:16000063,name:"Draco"},
-  {id:16000064,name:"Clancy"},
-  {id:16000065,name:"Moe"},
-  {id:16000066,name:"Kenji"},
-  {id:16000067,name:"Juju"},
-  {id:16000068,name:"Shade"}
+    en:{
+
+        navNews:"News",
+        navBuilds:"Builds",
+        navOpinions:"Opinions",
+
+        fanSite:"FAN SITE • BRAWL STARS",
+
+        hello:"Hello",
+
+        heroText:
+        "Welcome to SHADE BRAWL — a fan-made place for Brawl Stars news, brawler builds, opinions and useful tips.",
+
+        readNews:"READ NEWS",
+
+        findBuild:"FIND A BUILD",
+
+        latestNews:"Latest News",
+
+        newsKicker:
+        "🔥 STARR PARK NEWSROOM",
+
+        newsSubtitle:
+        "The latest information from the world of Brawl Stars.",
+
+        brawlerBuilds:
+        "Brawler Builds",
+
+        buildSubtitle:
+        "Search for a brawler and see their model and abilities.",
+
+        searchPlaceholder:
+        "🔎 Search brawler...",
+
+        gadget:"Gadget",
+
+        starPower:"Star Power",
+
+        hypercharge:"Hypercharge",
+
+        buildTip:"Build Tip",
+
+        buildTipDefault:
+        "Choose your build based on the map, mode and playstyle.",
+
+        opinionsTitle:
+        "Your Opinion",
+
+        nickname:"Nickname",
+
+        rating:"Rating",
+
+        comment:"Comment",
+
+        publish:"⭐ PUBLISH OPINION",
+
+        nicknamePlaceholder:
+        "Your nickname",
+
+        opinionPlaceholder:
+        "What do you think about the site?",
+
+        ratingRequired:
+        "Choose a rating from 1 to 5 stars first.",
+
+        noData:"No data",
+
+        loading:"Loading...",
+
+        noAbility:
+        "No ability data available.",
+
+        hyperData:
+        "Hypercharge data is shown when available.",
+
+        newsTag:"BRAWL STARS NEWS",
+
+        footer:
+        "Fan-made Brawl Stars website. Not affiliated with Supercell."
+
+    },
+
+
+    es:{
+
+        navNews:"Noticias",
+        navBuilds:"Builds",
+        navOpinions:"Opiniones",
+
+        fanSite:"SITIO FAN • BRAWL STARS",
+
+        hello:"Hola",
+
+        heroText:
+        "Bienvenido a SHADE BRAWL — noticias, builds, opiniones y consejos de Brawl Stars.",
+
+        readNews:"LEER NOTICIAS",
+
+        findBuild:"BUSCAR BUILD",
+
+        latestNews:"Últimas noticias",
+
+        newsKicker:
+        "🔥 SALA DE NOTICIAS DE STARR PARK",
+
+        newsSubtitle:
+        "Las últimas novedades del mundo de Brawl Stars.",
+
+        brawlerBuilds:
+        "Builds de Brawlers",
+
+        buildSubtitle:
+        "Busca un brawler y mira su modelo y habilidades.",
+
+        searchPlaceholder:
+        "🔎 Buscar brawler...",
+
+        gadget:"Gadget",
+
+        starPower:"Habilidad estelar",
+
+        hypercharge:"Hipercharge",
+
+        buildTip:"Consejo de build",
+
+        buildTipDefault:
+        "Elige tu build según el mapa, modo y estilo de juego.",
+
+        opinionsTitle:
+        "Tu opinión",
+
+        nickname:"Apodo",
+
+        rating:"Valoración",
+
+        comment:"Comentario",
+
+        publish:"⭐ PUBLICAR OPINIÓN",
+
+        nicknamePlaceholder:
+        "Tu apodo",
+
+        opinionPlaceholder:
+        "¿Qué opinas de la página?",
+
+        ratingRequired:
+        "Primero elige una valoración de 1 a 5 estrellas.",
+
+        noData:"Sin datos",
+
+        loading:"Cargando...",
+
+        noAbility:
+        "No hay datos sobre esta habilidad.",
+
+        hyperData:
+        "Los datos de Hipercharge aparecen cuando están disponibles.",
+
+        newsTag:
+        "NOTICIAS DE BRAWL STARS",
+
+        footer:
+        "Página fan de Brawl Stars. No está afiliada con Supercell."
+
+    },
+
+
+    it:{
+
+        navNews:"News",
+        navBuilds:"Build",
+        navOpinions:"Opinioni",
+
+        fanSite:"FAN SITE • BRAWL STARS",
+
+        hello:"Ciao",
+
+        heroText:
+        "Benvenuto su SHADE BRAWL — news, build, opinioni e consigli su Brawl Stars.",
+
+        readNews:"LEGGI NEWS",
+
+        findBuild:"TROVA BUILD",
+
+        latestNews:"Ultime notizie",
+
+        newsKicker:
+        "🔥 NEWSROOM DI STARR PARK",
+
+        newsSubtitle:
+        "Le ultime informazioni dal mondo di Brawl Stars.",
+
+        brawlerBuilds:
+        "Build Brawler",
+
+        buildSubtitle:
+        "Cerca un brawler e guarda modello e abilità.",
+
+        searchPlaceholder:
+        "🔎 Cerca brawler...",
+
+        gadget:"Gadget",
+
+        starPower:"Abilità stellare",
+
+        hypercharge:"Ipercarica",
+
+        buildTip:"Consiglio build",
+
+        buildTipDefault:
+        "Scegli la build in base alla mappa, modalità e stile di gioco.",
+
+        opinionsTitle:
+        "La tua opinione",
+
+        nickname:"Nickname",
+
+        rating:"Valutazione",
+
+        comment:"Commento",
+
+        publish:"⭐ PUBBLICA OPINIONE",
+
+        nicknamePlaceholder:
+        "Il tuo nickname",
+
+        opinionPlaceholder:
+        "Cosa ne pensi del sito?",
+
+        ratingRequired:
+        "Scegli prima una valutazione da 1 a 5 stelle.",
+
+        noData:"Nessun dato",
+
+        loading:"Caricamento...",
+
+        noAbility:
+        "Nessun dato disponibile per questa abilità.",
+
+        hyperData:
+        "I dati dell'Ipercarica vengono mostrati quando disponibili.",
+
+        newsTag:
+        "NEWS BRAWL STARS",
+
+        footer:
+        "Sito fan di Brawl Stars. Non affiliato con Supercell."
+
+    },
+
+
+    fr:{
+
+        navNews:"Actualités",
+        navBuilds:"Builds",
+        navOpinions:"Avis",
+
+        fanSite:"FAN SITE • BRAWL STARS",
+
+        hello:"Salut",
+
+        heroText:
+        "Bienvenue sur SHADE BRAWL — actualités, builds, avis et conseils Brawl Stars.",
+
+        readNews:"LIRE LES NEWS",
+
+        findBuild:"TROUVER UN BUILD",
+
+        latestNews:"Dernières nouvelles",
+
+        newsKicker:
+        "🔥 NEWSROOM DE STARR PARK",
+
+        newsSubtitle:
+        "Les dernières informations du monde de Brawl Stars.",
+
+        brawlerBuilds:
+        "Builds des Brawlers",
+
+        buildSubtitle:
+        "Cherche un brawler et regarde son modèle et ses capacités.",
+
+        searchPlaceholder:
+        "🔎 Rechercher un brawler...",
+
+        gadget:"Gadget",
+
+        starPower:"Pouvoir star",
+
+        hypercharge:"Hypercharge",
+
+        buildTip:"Conseil de build",
+
+        buildTipDefault:
+        "Choisis ton build selon la carte, le mode et ton style de jeu.",
+
+        opinionsTitle:
+        "Ton avis",
+
+        nickname:"Pseudo",
+
+        rating:"Note",
+
+        comment:"Commentaire",
+
+        publish:"⭐ PUBLIER L'AVIS",
+
+        nicknamePlaceholder:
+        "Ton pseudo",
+
+        opinionPlaceholder:
+        "Que penses-tu du site ?",
+
+        ratingRequired:
+        "Choisis d'abord une note de 1 à 5 étoiles.",
+
+        noData:"Aucune donnée",
+
+        loading:"Chargement...",
+
+        noAbility:
+        "Aucune donnée pour cette capacité.",
+
+        hyperData:
+        "Les données Hypercharge sont affichées lorsqu'elles sont disponibles.",
+
+        newsTag:
+        "ACTUALITÉS BRAWL STARS",
+
+        footer:
+        "Site fan de Brawl Stars. Non affilié à Supercell."
+
+    }
+
+};
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+const newsData={
+
+pl:[
+{
+date:"11 WRZ 2026",
+category:"ESPORT",
+image:"https://cdn.brawlify.com/brawlers/model/16000001.png",
+title:"Brawl Stars Esports AMA",
+text:"Zespół Brawl Stars Esports odpowiedział na pytania społeczności dotyczące przyszłości esportu i planów na 2027 rok."
+},
+{
+date:"4 WRZ 2026",
+category:"AKTUALIZACJA",
+image:"https://cdn.brawlify.com/brawlers/model/16000065.png",
+title:"Brawler Blast",
+text:"Starr Road została przebudowana w Brawler Blast — nowy system odblokowywania brawlerów wykorzystuje Kredyty."
+},
+{
+date:"24 SIE 2026",
+category:"ESPORT",
+image:"https://cdn.brawlify.com/brawlers/model/16000035.png",
+title:"Brawl Stars Championship 2027",
+text:"Pokazano pierwsze informacje dotyczące przyszłorocznych mistrzostw Brawl Stars."
+},
+{
+date:"10 SIE 2026",
+category:"TURNIEJE",
+image:"https://cdn.brawlify.com/brawlers/model/16000056.png",
+title:"Challengers Finals",
+text:"Poznaliśmy więcej szczegółów dotyczących finałów Brawl Stars Challengers."
+}
+],
+
+en:[
+{
+date:"11 SEP 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000001.png",
+title:"Brawl Stars Esports AMA",
+text:"The Brawl Stars Esports team answered community questions about the future of esports and plans for 2027."
+},
+{
+date:"4 SEP 2026",
+category:"UPDATE",
+image:"https://cdn.brawlify.com/brawlers/model/16000065.png",
+title:"Brawler Blast",
+text:"Starr Road has been reworked into Brawler Blast, a new way to unlock Brawlers using Credits."
+},
+{
+date:"24 AUG 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000035.png",
+title:"Brawl Stars Championship 2027",
+text:"The first information about the future Brawl Stars Championship was revealed."
+},
+{
+date:"10 AUG 2026",
+category:"TOURNAMENTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000056.png",
+title:"Challengers Finals",
+text:"More details about the Brawl Stars Challengers Finals were revealed."
+}
+],
+
+es:[
+{
+date:"11 SEP 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000001.png",
+title:"AMA de Brawl Stars Esports",
+text:"El equipo de Brawl Stars Esports respondió preguntas de la comunidad sobre el futuro de los esports y los planes para 2027."
+},
+{
+date:"4 SEP 2026",
+category:"ACTUALIZACIÓN",
+image:"https://cdn.brawlify.com/brawlers/model/16000065.png",
+title:"Brawler Blast",
+text:"El Camino Starr se ha convertido en Brawler Blast, un nuevo sistema para desbloquear Brawlers usando Créditos."
+},
+{
+date:"24 AGO 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000035.png",
+title:"Brawl Stars Championship 2027",
+text:"Se revelaron las primeras novedades del futuro Campeonato de Brawl Stars."
+},
+{
+date:"10 AGO 2026",
+category:"TORNEOS",
+image:"https://cdn.brawlify.com/brawlers/model/16000056.png",
+title:"Finales Challengers",
+text:"Se revelaron más detalles sobre las finales de Brawl Stars Challengers."
+}
+],
+
+it:[
+{
+date:"11 SET 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000001.png",
+title:"Brawl Stars Esports AMA",
+text:"Il team di Brawl Stars Esports ha risposto alle domande della community sul futuro degli esports e sui piani per il 2027."
+},
+{
+date:"4 SET 2026",
+category:"AGGIORNAMENTO",
+image:"https://cdn.brawlify.com/brawlers/model/16000065.png",
+title:"Brawler Blast",
+text:"La Starr Road è stata trasformata in Brawler Blast, un nuovo modo per sbloccare Brawler usando i Crediti."
+},
+{
+date:"24 AGO 2026",
+category:"ESPORTS",
+image:"https://cdn.brawlify.com/brawlers/model/16000035.png",
+title:"Brawl Stars Championship 2027",
+text:"Sono state rivelate le prime informazioni sul futuro Brawl Stars Championship."
+},
+{
+date:"10 AGO 2026",
+category:"TORNEI",
+image:"https://cdn.brawlify.com/brawlers/model/16000056.png",
+title:"Finali Challengers",
+text:"Sono stati rivelati altri dettagli sulle finali di Brawl Stars Challengers."
+}
+],
+
+fr:[
+{
+date:"11 SEPT. 2026",
+category:"ESPORT",
+image:"https://cdn.brawlify.com/brawlers/model/16000001.png",
+title:"Brawl Stars Esports AMA",
+text:"L'équipe Brawl Stars Esports a répondu aux questions de la communauté sur l'avenir de l'esport et les plans pour 2027."
+},
+{
+date:"4 SEPT. 2026",
+category:"MISE À JOUR",
+image:"https://cdn.brawlify.com/brawlers/model/16000065.png",
+title:"Brawler Blast",
+text:"La Starr Road devient Brawler Blast, un nouveau système pour débloquer les Brawlers avec des Crédits."
+},
+{
+date:"24 AOÛT 2026",
+category:"ESPORT",
+image:"https://cdn.brawlify.com/brawlers/model/16000035.png",
+title:"Brawl Stars Championship 2027",
+text:"Les premières informations sur le futur Brawl Stars Championship ont été révélées."
+},
+{
+date:"10 AOÛT 2026",
+category:"TOURNOIS",
+image:"https://cdn.brawlify.com/brawlers/model/16000056.png",
+title:"Finales Challengers",
+text:"Plus de détails sur les finales Brawl Stars Challengers ont été révélés."
+}
+]
+
+};
+
+
+function renderNews(lang){
+
+    const grid=
+        document.getElementById("newsGrid");
+
+    if(!grid)return;
+
+    const news=
+        newsData[lang] ||
+        newsData.pl;
+
+    const dictionary=
+        translations[lang] ||
+        translations.pl;
+
+    grid.innerHTML="";
+
+
+    news.forEach(item=>{
+
+        const card=
+            document.createElement("article");
+
+        card.className="news-card";
+
+
+        card.innerHTML=`
+
+            <div class="news-image">
+
+                <span class="news-badge">
+                    ${escapeHTML(item.category)}
+                </span>
+
+                <span class="news-date">
+                    ${escapeHTML(item.date)}
+                </span>
+
+                <img
+                    src="${item.image}"
+                    alt=""
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="news-content">
+
+                <h3>
+                    ${escapeHTML(item.title)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(item.text)}
+                </p>
+
+
+                <div class="news-footer">
+
+                    <span class="news-tag">
+                        ${dictionary.newsTag}
+                    </span>
+
+                    <span class="news-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   BRAWLERS
+========================================================= */
+
+const API=
+"https://api.brawlapi.com/v1/brawlers";
+
+
+const fallbackBrawlers=[
+
+{id:16000000,name:"Shelly"},
+{id:16000001,name:"Colt"},
+{id:16000002,name:"Bull"},
+{id:16000003,name:"Brock"},
+{id:16000004,name:"Rico"},
+{id:16000005,name:"Spike"},
+{id:16000006,name:"Barley"},
+{id:16000007,name:"Jessie"},
+{id:16000008,name:"Nita"},
+{id:16000009,name:"Dynamike"},
+{id:16000010,name:"El Primo"},
+{id:16000011,name:"Mortis"},
+{id:16000012,name:"Crow"},
+{id:16000013,name:"Poco"},
+{id:16000014,name:"Bo"},
+{id:16000015,name:"Piper"},
+{id:16000016,name:"Pam"},
+{id:16000017,name:"Tara"},
+{id:16000018,name:"Darryl"},
+{id:16000019,name:"Penny"},
+{id:16000020,name:"Frank"},
+{id:16000021,name:"Gene"},
+{id:16000022,name:"Tick"},
+{id:16000023,name:"Leon"},
+{id:16000024,name:"Rosa"},
+{id:16000025,name:"Carl"},
+{id:16000026,name:"Bibi"},
+{id:16000027,name:"8-Bit"},
+{id:16000028,name:"Sandy"},
+{id:16000029,name:"Bea"},
+{id:16000030,name:"Emz"},
+{id:16000031,name:"Mr. P"},
+{id:16000032,name:"Max"},
+{id:16000033,name:"Jacky"},
+{id:16000034,name:"Gale"},
+{id:16000035,name:"Nani"},
+{id:16000036,name:"Sprout"},
+{id:16000037,name:"Surge"},
+{id:16000038,name:"Colette"},
+{id:16000039,name:"Amber"},
+{id:16000040,name:"Lou"},
+{id:16000041,name:"Byron"},
+{id:16000042,name:"Edgar"},
+{id:16000043,name:"Griff"},
+{id:16000044,name:"Grom"},
+{id:16000045,name:"Bonnie"},
+{id:16000046,name:"Fang"},
+{id:16000047,name:"Eve"},
+{id:16000048,name:"Janet"},
+{id:16000049,name:"Otis"},
+{id:16000050,name:"Buster"},
+{id:16000051,name:"Gray"},
+{id:16000052,name:"R-T"},
+{id:16000053,name:"Willow"},
+{id:16000054,name:"Maisie"},
+{id:16000055,name:"Hank"},
+{id:16000056,name:"Cordelius"},
+{id:16000057,name:"Doug"},
+{id:16000058,name:"Chuck"},
+{id:16000059,name:"Charlie"},
+{id:16000060,name:"Mico"},
+{id:16000061,name:"Melodie"},
+{id:16000062,name:"Lily"},
+{id:16000063,name:"Draco"},
+{id:16000064,name:"Clancy"},
+{id:16000065,name:"Moe"},
+{id:16000066,name:"Kenji"},
+{id:16000067,name:"Juju"},
+{id:16000068,name:"Shade"}
+
 ];
 
 
-let brawlers = [];
-let selectedBrawler = null;
+let brawlers=[];
 
+let selectedBrawler=null;
 
-/* =========================================================
-   LOAD BRAWLERS
-========================================================= */
 
 async function loadBrawlers(){
 
-  const list = document.getElementById("brawlerList");
+    const list=
+        document.getElementById("brawlerList");
 
-  try{
 
-    const response = await fetch(API);
+    try{
 
-    if(!response.ok){
-      throw new Error("API unavailable");
+        const response=
+            await fetch(API);
+
+
+        if(!response.ok){
+            throw new Error("API");
+        }
+
+
+        const data=
+            await response.json();
+
+
+        brawlers=
+            data.list ||
+            data.items ||
+            data;
+
+
+        if(
+            !Array.isArray(brawlers) ||
+            !brawlers.length
+        ){
+
+            throw new Error("NO DATA");
+
+        }
+
+    }catch(error){
+
+        brawlers=
+            fallbackBrawlers;
+
     }
 
-    const data = await response.json();
 
-    brawlers =
-      data.list ||
-      data.items ||
-      data;
+    renderBrawlers(brawlers);
 
-    if(!Array.isArray(brawlers) || !brawlers.length){
-      throw new Error("No brawlers");
-    }
 
-  }catch(error){
+    const shade=
+        brawlers.find(
+            b=>
+            String(b.name)
+            .toLowerCase()==="shade"
+        );
 
-    /*
-      Jeśli API jest chwilowo niedostępne,
-      strona nadal działa dzięki liście awaryjnej.
-    */
 
-    brawlers = fallbackBrawlers;
-  }
-
-  renderBrawlers(brawlers);
-
-  const shade =
-    brawlers.find(
-      b => String(b.name).toLowerCase() === "shade"
+    selectBrawler(
+        shade ||
+        brawlers[0]
     );
 
-  selectBrawler(shade || brawlers[0]);
 }
 
-
-/* =========================================================
-   RENDER BRAWLER BUTTONS
-========================================================= */
 
 function renderBrawlers(items){
 
-  const list = document.getElementById("brawlerList");
+    const list=
+        document.getElementById(
+            "brawlerList"
+        );
 
-  list.innerHTML = "";
 
-  items.forEach(brawler => {
+    list.innerHTML="";
 
-    const button = document.createElement("button");
 
-    button.className = "brawler-btn";
+    items.forEach(brawler=>{
 
-    button.dataset.name = brawler.name;
+        const button=
+            document.createElement("button");
 
-    const id = brawler.id;
 
-    button.innerHTML = `
-      <img
-        src="https://cdn.brawlify.com/brawlers/borderless/${id}.png"
-        alt=""
-        onerror="this.style.display='none'"
-      >
-      <span>${escapeHTML(brawler.name)}</span>
-    `;
+        button.className=
+            "brawler-btn";
 
-    button.addEventListener("click",()=>{
-      selectBrawler(brawler);
+
+        button.dataset.name=
+            brawler.name;
+
+
+        button.innerHTML=`
+
+            <img
+                src="https://cdn.brawlify.com/brawlers/borderless/${brawler.id}.png"
+                alt=""
+                onerror="this.style.display='none'"
+            >
+
+            <span>
+                ${escapeHTML(brawler.name)}
+            </span>
+
+        `;
+
+
+        button.addEventListener(
+            "click",
+            ()=>{
+                selectBrawler(brawler);
+            }
+        );
+
+
+        list.appendChild(button);
+
     });
 
-    list.appendChild(button);
-  });
 }
 
-
-/* =========================================================
-   SELECT BRAWLER
-========================================================= */
 
 function selectBrawler(brawler){
 
-  if(!brawler) return;
+    if(!brawler)return;
 
-  selectedBrawler = brawler;
 
-  document
-    .querySelectorAll(".brawler-btn")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.name === brawler.name
-      );
-    });
+    selectedBrawler=
+        brawler;
 
-  const id = brawler.id;
 
-  const image =
-    brawler.imageUrl ||
-    `https://cdn.brawlify.com/brawlers/model/${id}.png`;
+    document
+        .querySelectorAll(".brawler-btn")
+        .forEach(btn=>{
 
-  document.getElementById("selectedImage").src = image;
+            btn.classList.toggle(
+                "active",
+                btn.dataset.name===
+                brawler.name
+            );
 
-  document.getElementById("selectedName").textContent =
-    brawler.name || "Brawler";
+        });
 
-  document.getElementById("selectedClass").textContent =
-    brawler.class?.name ||
-    "BRAWLER";
 
-  document.getElementById("selectedDescription").textContent =
-    brawler.description ||
-    "Brawler information is loading.";
+    const id=
+        brawler.id;
 
-  const gadget =
-    brawler.gadgets?.find(g=>g.released !== false) ||
-    brawler.gadgets?.[0];
 
-  const star =
-    brawler.starPowers?.find(s=>s.released !== false) ||
-    brawler.starPowers?.[0];
+    const image=
+        brawler.imageUrl ||
+        `https://cdn.brawlify.com/brawlers/model/${id}.png`;
 
-  setAbility(
-    "gadget",
-    gadget
-  );
 
-  setAbility(
-    "star",
-    star
-  );
+    document.getElementById(
+        "selectedImage"
+    ).src=image;
 
-  /*
-    Nie wymyślamy nazwy Hypercharge.
-    Jeśli API ją dostarcza, pokażemy ją.
-    Jeśli nie, uczciwie pokażemy brak danych.
-  */
 
-  const hyper =
-    brawler.hypercharge ||
-    brawler.hyperCharge ||
-    brawler.hypercharges?.[0];
+    document.getElementById(
+        "selectedName"
+    ).textContent=
+        brawler.name ||
+        "Brawler";
 
-  document.getElementById("hyperName").textContent =
-    hyper?.name ||
-    "Hypercharge data";
 
-  document.getElementById("hyperDescription").textContent =
-    hyper?.description ||
-    "Dane Hypercharge zależą od dostępnej bazy danych.";
+    document.getElementById(
+        "selectedClass"
+    ).textContent=
+        brawler.class?.name ||
+        "BRAWLER";
 
-  document.getElementById("buildTip").textContent =
-    makeTip(brawler.name);
+
+    document.getElementById(
+        "selectedDescription"
+    ).textContent=
+        brawler.description ||
+        "Brawler information.";
+
+
+    const gadget=
+        brawler.gadgets?.[0];
+
+
+    const star=
+        brawler.starPowers?.[0];
+
+
+    setAbility(
+        "gadget",
+        gadget
+    );
+
+
+    setAbility(
+        "star",
+        star
+    );
+
+
+    const hyper=
+        brawler.hypercharge ||
+        brawler.hyperCharge ||
+        brawler.hypercharges?.[0];
+
+
+    document.getElementById(
+        "hyperName"
+    ).textContent=
+        hyper?.name ||
+        "Hypercharge";
+
+
+    document.getElementById(
+        "hyperDescription"
+    ).textContent=
+        hyper?.description ||
+        "Hypercharge data available when provided by the database.";
+
+
+    document.getElementById(
+        "buildTip"
+    ).textContent=
+        makeTip(brawler.name);
+
 }
 
 
-/* =========================================================
-   ABILITIES
-========================================================= */
+function setAbility(
+    prefix,
+    ability
+){
 
-function setAbility(prefix, ability){
+    const icon=
+        document.getElementById(
+            prefix+"Icon"
+        );
 
-  const icon =
-    document.getElementById(prefix + "Icon");
 
-  const name =
-    document.getElementById(prefix + "Name");
+    const name=
+        document.getElementById(
+            prefix+"Name"
+        );
 
-  const description =
-    document.getElementById(prefix + "Description");
 
-  if(!ability){
+    const description=
+        document.getElementById(
+            prefix+"Description"
+        );
 
-    icon.style.display = "none";
-    name.textContent = "No data";
-    description.textContent = "No ability data available.";
 
-    return;
-  }
+    if(!ability){
 
-  icon.style.display = "block";
+        icon.style.display="none";
 
-  icon.src =
-    ability.imageUrl ||
-    `https://cdn.brawlify.com/${prefix === "gadget" ? "gadgets" : "star-powers"}/borderless/${ability.id}.png`;
+        name.textContent="No data";
 
-  name.textContent =
-    ability.name || "Unknown";
+        description.textContent=
+            "No ability data available.";
 
-  description.textContent =
-    ability.description ||
-    "";
+        return;
+
+    }
+
+
+    icon.style.display="block";
+
+
+    icon.src=
+        ability.imageUrl ||
+        `https://cdn.brawlify.com/${
+            prefix==="gadget"
+            ?"gadgets"
+            :"star-powers"
+        }/borderless/${ability.id}.png`;
+
+
+    name.textContent=
+        ability.name ||
+        "Unknown";
+
+
+    description.textContent=
+        ability.description ||
+        "";
+
+}
+
+
+document
+.getElementById("brawlerSearch")
+.addEventListener(
+    "input",
+    function(){
+
+        const query=
+            this.value
+            .trim()
+            .toLowerCase();
+
+
+        const filtered=
+            brawlers.filter(
+                b=>
+                String(b.name)
+                .toLowerCase()
+                .includes(query)
+            );
+
+
+        renderBrawlers(filtered);
+
+    }
+);
+
+
+function makeTip(name){
+
+    const tips={
+
+        Shade:
+        "Wykorzystuj mobilność i ataki z bliska.",
+
+        Colt:
+        "Wykorzystuj długie linie i ćwicz celowanie.",
+
+        Darryl:
+        "Wykorzystuj Super do szybkiego wejścia w walkę.",
+
+        Shelly:
+        "Trzymaj przeciwników na dystans odpowiedni do Super.",
+
+        Spike:
+        "Kontroluj przejścia i utrzymuj dystans.",
+
+        Crow:
+        "Nękaj przeciwników i wykorzystuj truciznę.",
+
+        Mortis:
+        "Czekaj na odpowiedni moment do wejścia.",
+
+        Edgar:
+        "Nie skacz bez planu — wybierz dobry cel."
+
+    };
+
+
+    return tips[name] ||
+        "Dobierz build do mapy, trybu i własnego stylu.";
+
 }
 
 
@@ -1379,330 +3105,399 @@ function setAbility(prefix, ability){
    SEARCH
 ========================================================= */
 
+
+/* =========================================================
+   OPINIONS
+========================================================= */
+
+let selectedRating=0;
+
+
 document
-  .getElementById("brawlerSearch")
-  .addEventListener("input",function(){
+.querySelectorAll(".star")
+.forEach(star=>{
 
-    const query =
-      this.value.trim().toLowerCase();
+    star.addEventListener(
+        "click",
+        ()=>{
 
-    const filtered =
-      brawlers.filter(
-        b =>
-          String(b.name)
-            .toLowerCase()
-            .includes(query)
-      );
-
-    renderBrawlers(filtered);
-  });
+            selectedRating=
+                Number(
+                    star.dataset.rating
+                );
 
 
-/* =========================================================
-   TIPS
-========================================================= */
+            document
+            .querySelectorAll(".star")
+            .forEach(s=>{
 
-function makeTip(name){
+                s.classList.toggle(
+                    "active",
+                    Number(
+                        s.dataset.rating
+                    )<=selectedRating
+                );
 
-  const tips = {
-    "Shade":"Wykorzystuj mobilność i ataki z bliska. Dobieraj build pod mapę.",
-    "Colt":"Trenuj celowanie i wykorzystuj długie linie na mapie.",
-    "Darryl":"Wykorzystuj Super do szybkiego wejścia i wyjścia z walki.",
-    "Shelly":"Walcz z bliska i wykorzystuj Super do kontroli przeciwnika.",
-    "Spike":"Trzymaj dystans i kontroluj przejścia.",
-    "Crow":"Nękaj przeciwników i wykorzystuj truciznę do kontroli.",
-    "Mortis":"Nie wchodź bez planu. Czekaj na właściwy moment.",
-    "Edgar":"Wybierz dobry moment na wejście, zamiast skakać od razu."
-  };
+            });
 
-  return tips[name] ||
-    "Dobierz build do mapy, trybu gry i własnego stylu.";
-}
-
-
-/* =========================================================
-   OPINIONS — LOCAL STORAGE
-========================================================= */
-
-let selectedRating = 0;
-
-const stars =
-  document.querySelectorAll(".star");
-
-stars.forEach(star=>{
-
-  star.addEventListener("click",()=>{
-
-    selectedRating =
-      Number(star.dataset.rating);
-
-    stars.forEach(s=>{
-      s.classList.toggle(
-        "active",
-        Number(s.dataset.rating) <= selectedRating
-      );
-    });
-
-  });
+        }
+    );
 
 });
 
 
 function getReviews(){
 
-  try{
+    try{
 
-    return JSON.parse(
-      localStorage.getItem("shadeReviews")
-    ) || [];
+        return JSON.parse(
+            localStorage.getItem(
+                "shadeReviews"
+            )
+        ) || [];
 
-  }catch{
+    }catch{
 
-    return [];
-  }
+        return [];
+
+    }
+
 }
 
 
 function saveReviews(reviews){
 
-  localStorage.setItem(
-    "shadeReviews",
-    JSON.stringify(reviews)
-  );
+    localStorage.setItem(
+        "shadeReviews",
+        JSON.stringify(reviews)
+    );
+
 }
 
 
 function renderReviews(){
 
-  const container =
-    document.getElementById("reviews");
+    const container=
+        document.getElementById(
+            "reviews"
+        );
 
-  const reviews =
-    getReviews();
 
-  container.innerHTML = "";
+    const reviews=
+        getReviews();
 
-  reviews.forEach(review=>{
 
-    const div =
-      document.createElement("div");
+    container.innerHTML="";
 
-    div.className = "review";
 
-    const safeName =
-      escapeHTML(review.name);
+    reviews.forEach(review=>{
 
-    const safeComment =
-      escapeHTML(review.comment);
+        const div=
+            document.createElement(
+                "div"
+            );
 
-    const rating =
-      "★".repeat(review.rating) +
-      "☆".repeat(5-review.rating);
 
-    div.innerHTML = `
-      <div class="review-top">
-        <strong>${safeName}</strong>
-        <span class="review-stars">${rating}</span>
-      </div>
-      <p>${safeComment}</p>
-    `;
+        div.className="review";
 
-    container.appendChild(div);
-  });
+
+        const rating=
+            "★".repeat(
+                review.rating
+            )+
+            "☆".repeat(
+                5-review.rating
+            );
+
+
+        div.innerHTML=`
+
+            <div class="review-top">
+
+                <strong>
+                    ${escapeHTML(review.name)}
+                </strong>
+
+                <span class="review-stars">
+                    ${rating}
+                </span>
+
+            </div>
+
+            <p>
+                ${escapeHTML(review.comment)}
+            </p>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
 }
 
 
 document
-  .getElementById("opinionForm")
-  .addEventListener("submit",function(event){
+.getElementById("opinionForm")
+.addEventListener(
+    "submit",
+    function(event){
 
-    event.preventDefault();
+        event.preventDefault();
 
-    if(selectedRating === 0){
 
-      alert(
-        "Najpierw wybierz ocenę od 1 do 5 gwiazdek."
-      );
+        const lang=
+            localStorage.getItem(
+                "shadeLanguage"
+            ) ||
+            "pl";
 
-      return;
+
+        if(selectedRating===0){
+
+            alert(
+                translations[lang]
+                .ratingRequired
+            );
+
+            return;
+
+        }
+
+
+        const name=
+            document
+            .getElementById("nickname")
+            .value
+            .trim();
+
+
+        const comment=
+            document
+            .getElementById("comment")
+            .value
+            .trim();
+
+
+        if(!name || !comment)return;
+
+
+        const reviews=
+            getReviews();
+
+
+        reviews.unshift({
+
+            name:name,
+
+            comment:comment,
+
+            rating:selectedRating,
+
+            date:
+                new Date()
+                .toISOString()
+
+        });
+
+
+        saveReviews(
+            reviews.slice(0,30)
+        );
+
+
+        this.reset();
+
+
+        selectedRating=0;
+
+
+        document
+        .querySelectorAll(".star")
+        .forEach(s=>{
+            s.classList.remove(
+                "active"
+            );
+        });
+
+
+        renderReviews();
+
     }
-
-    const name =
-      document
-        .getElementById("nickname")
-        .value
-        .trim();
-
-    const comment =
-      document
-        .getElementById("comment")
-        .value
-        .trim();
-
-    if(!name || !comment) return;
-
-    const reviews =
-      getReviews();
-
-    reviews.unshift({
-      name,
-      comment,
-      rating:selectedRating,
-      date:new Date().toISOString()
-    });
-
-    saveReviews(
-      reviews.slice(0,30)
-    );
-
-    this.reset();
-
-    selectedRating = 0;
-
-    stars.forEach(s=>{
-      s.classList.remove("active");
-    });
-
-    renderReviews();
-  });
+);
 
 
 /* =========================================================
-   LANGUAGES
+   LANGUAGE PICKER
 ========================================================= */
 
-const translations = {
+const languagePicker=
+    document.querySelector(
+        ".language-picker"
+    );
 
-  pl:{
-    fanSite:"FAN SITE • BRAWL STARS",
-    heroText:"Witaj na SHADE BRAWL — fanowskiej stronie z newsami, buildami brawlerów, opiniami i poradami.",
-    readNews:"CZYTAJ NEWSY",
-    findBuild:"ZNAJDŹ BUILD",
-    latestNews:"Najnowsze newsy",
-    newsSubtitle:"Najważniejsze rzeczy, które dzieją się w Brawl Stars.",
-    brawlerBuilds:"Buildy brawlerów",
-    buildSubtitle:"Wyszukaj brawlera i zobacz jego prawdziwy model oraz umiejętności.",
-    opinionsTitle:"Twoja opinia",
-    nickname:"Nick",
-    rating:"Ocena",
-    comment:"Komentarz",
-    publish:"⭐ OPUBLIKUJ OPINIĘ"
-  },
 
-  en:{
-    fanSite:"FAN SITE • BRAWL STARS",
-    heroText:"Welcome to SHADE BRAWL — a fan-made place for Brawl Stars news, brawler builds, opinions and useful tips.",
-    readNews:"READ NEWS",
-    findBuild:"FIND A BUILD",
-    latestNews:"Latest News",
-    newsSubtitle:"The most important things happening in Brawl Stars.",
-    brawlerBuilds:"Brawler Builds",
-    buildSubtitle:"Search for a brawler and see their game model and abilities.",
-    opinionsTitle:"Your Opinion",
-    nickname:"Nickname",
-    rating:"Rating",
-    comment:"Comment",
-    publish:"⭐ PUBLISH OPINION"
-  },
+const languageButton=
+    document.getElementById(
+        "languageButton"
+    );
 
-  es:{
-    fanSite:"SITIO FAN • BRAWL STARS",
-    heroText:"Bienvenido a SHADE BRAWL — noticias, builds, opiniones y consejos de Brawl Stars.",
-    readNews:"LEER NOTICIAS",
-    findBuild:"BUSCAR BUILD",
-    latestNews:"Últimas noticias",
-    newsSubtitle:"Las cosas más importantes que pasan en Brawl Stars.",
-    brawlerBuilds:"Builds de Brawlers",
-    buildSubtitle:"Busca un brawler y mira su modelo y habilidades.",
-    opinionsTitle:"Tu opinión",
-    nickname:"Apodo",
-    rating:"Valoración",
-    comment:"Comentario",
-    publish:"⭐ PUBLICAR OPINIÓN"
-  },
 
-  it:{
-    fanSite:"FAN SITE • BRAWL STARS",
-    heroText:"Benvenuto su SHADE BRAWL — news, build, opinioni e consigli su Brawl Stars.",
-    readNews:"LEGGI NEWS",
-    findBuild:"TROVA BUILD",
-    latestNews:"Ultime notizie",
-    newsSubtitle:"Le cose più importanti che succedono in Brawl Stars.",
-    brawlerBuilds:"Build Brawler",
-    buildSubtitle:"Cerca un brawler e guarda modello e abilità.",
-    opinionsTitle:"La tua opinione",
-    nickname:"Nickname",
-    rating:"Valutazione",
-    comment:"Commento",
-    publish:"⭐ PUBBLICA OPINIONE"
-  },
+const languageFlags={
 
-  fr:{
-    fanSite:"FAN SITE • BRAWL STARS",
-    heroText:"Bienvenue sur SHADE BRAWL — actualités, builds, avis et conseils Brawl Stars.",
-    readNews:"LIRE LES NEWS",
-    findBuild:"TROUVER UN BUILD",
-    latestNews:"Dernières nouvelles",
-    newsSubtitle:"Les choses les plus importantes dans Brawl Stars.",
-    brawlerBuilds:"Builds des Brawlers",
-    buildSubtitle:"Cherche un brawler et regarde son modèle et ses capacités.",
-    opinionsTitle:"Ton avis",
-    nickname:"Pseudo",
-    rating:"Note",
-    comment:"Commentaire",
-    publish:"⭐ PUBLIER L'AVIS"
-  }
+    pl:"🇵🇱",
+
+    en:"🇬🇧",
+
+    es:"🇪🇸",
+
+    it:"🇮🇹",
+
+    fr:"🇫🇷"
 
 };
 
 
-const flags = {
-  pl:"🇵🇱",
-  en:"🇬🇧",
-  es:"🇪🇸",
-  it:"🇮🇹",
-  fr:"🇫🇷"
-};
+languageButton.addEventListener(
+    "click",
+    ()=>{
+        languagePicker
+        .classList
+        .toggle("open");
+    }
+);
+
+
+document
+.querySelectorAll(
+    "#languageMenu button"
+)
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            applyLanguage(
+                button.dataset.lang
+            );
+
+            languagePicker
+            .classList
+            .remove("open");
+
+        }
+    );
+
+});
+
+
+document.addEventListener(
+    "click",
+    event=>{
+
+        if(
+            !languagePicker
+            .contains(event.target)
+        ){
+
+            languagePicker
+            .classList
+            .remove("open");
+
+        }
+
+    }
+);
 
 
 function applyLanguage(lang){
 
-  const dictionary =
-    translations[lang] ||
-    translations.pl;
+    const dictionary=
+        translations[lang] ||
+        translations.pl;
 
-  document
-    .querySelectorAll("[data-i18n]")
+
+    document
+    .querySelectorAll(
+        "[data-i18n]"
+    )
     .forEach(element=>{
 
-      const key =
-        element.dataset.i18n;
+        const key=
+            element.dataset.i18n;
 
-      if(dictionary[key]){
-        element.textContent =
-          dictionary[key];
-      }
+
+        if(dictionary[key]){
+
+            element.textContent=
+                dictionary[key];
+
+        }
+
     });
 
-  document.getElementById(
-    "languageFlag"
-  ).textContent =
-    flags[lang];
 
-  localStorage.setItem(
-    "shadeLanguage",
-    lang
-  );
+    languageButton.innerHTML=
+        `${languageFlags[lang]} ${lang.toUpperCase()} ▾`;
+
+
+    document.documentElement.lang=
+        lang;
+
+
+    localStorage.setItem(
+        "shadeLanguage",
+        lang
+    );
+
+
+    const search=
+        document.getElementById(
+            "brawlerSearch"
+        );
+
+
+    if(search){
+
+        search.placeholder=
+            dictionary.searchPlaceholder;
+
+    }
+
+
+    const nickname=
+        document.getElementById(
+            "nickname"
+        );
+
+
+    if(nickname){
+
+        nickname.placeholder=
+            dictionary.nicknamePlaceholder;
+
+    }
+
+
+    const comment=
+        document.getElementById(
+            "comment"
+        );
+
+
+    if(comment){
+
+        comment.placeholder=
+            dictionary.opinionPlaceholder;
+
+    }
+
+
+    renderNews(lang);
+
 }
-
-
-document
-  .getElementById("languageSelect")
-  .addEventListener("change",function(){
-
-    applyLanguage(this.value);
-
-  });
 
 
 /* =========================================================
@@ -1711,12 +3506,13 @@ document
 
 function escapeHTML(value){
 
-  return String(value ?? "")
+    return String(value ?? "")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
@@ -1724,22 +3520,27 @@ function escapeHTML(value){
    START
 ========================================================= */
 
-const savedLanguage =
-  localStorage.getItem("shadeLanguage") ||
-  "pl";
+const savedLanguage=
+    localStorage.getItem(
+        "shadeLanguage"
+    ) ||
+    "pl";
 
-document.getElementById(
-  "languageSelect"
-).value = savedLanguage;
 
-applyLanguage(savedLanguage);
+applyLanguage(
+    savedLanguage
+);
+
 
 renderReviews();
+
 
 loadBrawlers();
 
 </script>
 
 </body>
+
 </html>
 ```
+
